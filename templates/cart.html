@@ -1,0 +1,294 @@
+{% extends 'base.html' %}
+
+{% block title %} Cart {% endblock title %}
+
+{% comment %} {% block title %} Cart {% endblock title %} {% endcomment %}
+
+{% block body %}
+<div class="container">
+
+    <body class="bg-light">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-10 col-11 mx-auto">
+                    <div class="row mt-5 gx-3">
+                        <!-- left side div -->
+                        <div class="col-md-12 col-lg-8 col-11 mx-auto main_cart mb-lg-0 mb-5 shadow">
+                            
+                            <div class="card p-4">
+                                <h2 class="py-4 font-weight-bold">Cart ( <span> {{cart_items_length}} </span> items)</h2>
+                                
+                                <input type="hidden" name="myVar" id="myVar" value="{{cart_items_length}}">
+
+                                {% for i in product_list_for_cart %}
+                                <div class="row">
+                                    <!-- cart images div -->
+                                    <div
+                                        class="col-md-5 col-11 mx-auto bg-light d-flex justify-content-center align-items-center shadow product_img">
+                                        <img src="/media/{{i.image}}" class="img-fluid"
+                                            alt="cart img">
+                                    </div>
+
+                                    <!-- cart product details -->
+                                    <div class="col-md-7 col-11 mx-auto px-4 mt-2">
+                                        <div class="row">
+                                            <!-- product name  -->
+                                            <div class="col-6 card-title">
+                                                <h1 class="mb-4 product_name"> <b> Product : {{i.product_name}} </b> </h1>
+                                                <p class="mb-2"> {{i.desc}} </p>
+                                                {% comment %} <p class="mb-2">Feature: RGB Light</p>
+                                                <p class="mb-3">SIZE: Over tshe ear</p> {% endcomment %}
+                                            </div> <br>
+                                            <!-- quantity inc dec -->
+                                            <div class="col-10">
+                                                <ul class="pagination justify-content-end set_quantity">
+                                                    <li class="page-item">
+                                                        <button class="page-link "
+                                                            onclick="decreaseNumber('textbox','itemval')">
+                                                            <i class="fas fa-minus"></i> </button>
+                                                    </li>
+                                                    <li class="page-item"><input type="text" name="" class="page-link"
+                                                            value="0" id="textbox">
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <button class="page-link"
+                                                            onclick="increaseNumber('textbox','itemval')"> <i
+                                                                class="fas fa-plus"></i></button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- //remover move and price -->
+                                        <br>
+                                        <div class="row">
+                                            <form action="/cart" method="post">
+                                                {% csrf_token %}
+                                                <input hidden type="text" name="product" value="{{i.id}}">
+                                                <input hidden type="text" name="remove" id="remove" value="True">
+                                                <input hidden type="text" name="delete_button" id="delete_button" value="{{i.id}}">
+                                                <!-- <input type="submit" name="minus_button" id="minus_button" class="btn btn-block btn-secondary fas fa-trash-alt"> -->
+                                                <button type="submit" name="minus_button" id="minus_button" class="btn btn-block btn-secondary fas fa-trash-alt" style="color:black"> Remove</button>
+                                            </form>
+                                        </div>
+
+                                        <div class="row">
+                                            <!-- <div class="col-8 d-flex justify-content-between remove_wish">
+                                                <p><i class="fas fa-trash-alt"></i> REMOVE ITEM</p>
+                                                <p><i class="fas fa-heart"></i>MOVE TO WISH LIST </p>
+                                            </div><br> -->
+                                            <!-- <p>Product Id: {{i.id}}</p> -->
+                                            <br>
+                                            <div class="row">
+                                                <form action="/cart" method="post">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="add_to_checkout" id="add_to_checkout" value="{{i.price}}">
+                                                    <br>
+                                                    <button class="btn btn-primary" name="item_of_checkout" id="product_{{i.id}}" value="{{i.id}}"> Add To Checkout </button>
+                                                  </form>
+                                            </div>
+                                            <div class="col-4 d-flex justify-content-end price_money">
+                                                <h3>Rs.<span id="itemval"> {{i.price}} </span></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <hr>
+                                <br>
+                                {% endfor %}
+
+                                
+                            </div>
+                            <hr />
+                            
+                            
+                            
+                            <!-- 2nd cart product -->
+                            <!-- <div class="card p-4">
+                                <div class="row"> -->
+                                    <!-- cart images div -->
+                                    <!-- <div
+                                        class="col-md-5 col-11 mx-auto bg-light d-flex justify-content-center align-items-center shadow product_img">
+                                        <img src="/static/iphone-13-pro-max-blue-select.png" class="img-fluid"
+                                            alt="cart img">
+                                    </div> -->
+
+
+
+
+                                    <!-- cart product details -->
+                                    <!-- <div class="col-md-7 col-11 mx-auto px-4 mt-2">
+                                        <div class="row"> -->
+                                            <!-- product name  -->
+                                            <!-- <div class="col-6 card-title">
+                                                <h1 class="mb-4 product_name">iphone-13-pro-max</h1>
+                                                <p class="mb-2">Color: Blue</p>
+                                                <p class="mb-2">Memory Size: 256 GB</p>
+                                                <p class="mb-3">SIZE: 6.7 inch</p>
+                                            </div> -->
+                                            <!-- quantity inc dec -->
+                                            <!-- <div class="col-6">
+                                                <ul class="pagination justify-content-end set_quantity">
+                                                    <li class="page-item">
+                                                        <button class="page-link "
+                                                            onclick="decreaseNumber('textbox1','itemval1')"> <i
+                                                                class="fas fa-minus"></i> </button>
+                                                    </li>
+                                                    <li class="page-item"><input type="text" name="" class="page-link"
+                                                            value="0" id="textbox1">
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <button class="page-link"
+                                                            onclick="increaseNumber('textbox1','itemval1')"> <i
+                                                                class="fas fa-plus"></i></button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div> -->
+                                        <!-- //remover move and price -->
+                                        <!-- <div class="row">
+                                            <div class="col-8 d-flex justify-content-between remove_wish">
+                                                <p><i class="fas fa-trash-alt"></i> REMOVE ITEM</p>
+                                                <p><i class="fas fa-heart"></i>MOVE TO WISH LIST </p>
+                                            </div>
+                                            <div class="col-4 d-flex justify-content-end price_money">
+                                                <h3>$<span id="itemval1">0.00 </span> </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                        <!-- right side div -->
+                        <div class="col-md-12 col-lg-4 col-11 mx-auto mt-lg-0 mt-md-5">
+                            <div class="right_side p-3 shadow bg-white">
+                                <h2 class="product_name mb-5">The Total Amount Of</h2>
+                                <div class="price_indiv d-flex justify-content-between">
+                                    <p>Product amount</p>
+                                    <p>Rs.<span id="product_total_amt">{{item_total_price_for_cart}}</span></p>
+                                </div>
+                                <div class="price_indiv d-flex justify-content-between">
+                                    <p>Shipping Charge</p>
+                                    <p>Rs.<span id="shipping_charge">{{shipping_charge}}</span></p>
+                                </div>
+                                <hr />
+                                <div class="total-amt d-flex justify-content-between font-weight-bold">
+                                    <p>The total amount of (including VAT)</p>
+                                    <p>Rs.<span id="total_cart_amt">{{total_charge}}</span></p>
+                                </div>
+                                <a href="/checkout">
+                                    <button class="btn btn-primary text-uppercase">Checkout</button>
+                                </a>
+                            </div>
+                            <!-- discount code part -->
+                            <div class="discount_code mt-3 shadow">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <a class="d-flex justify-content-between" data-toggle="collapse"
+                                            href="#collapseExample" aria-expanded="false"
+                                            aria-controls="collapseExample">
+                                            Add a discount code (optional)
+                                            <span><i class="fas fa-chevron-down pt-1"></i></span>
+                                        </a>
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="mt-3">
+                                                <input type="text" name="" id="discount_code1"
+                                                    class="form-control font-weight-bold"
+                                                    placeholder="Enter the discount code">
+                                                <small id="error_trw" class="text-dark mt-3">Enter The Code</small>
+                                            </div>
+                                            <button class="btn btn-primary btn-sm mt-3"
+                                                onclick="discount_code()">Apply</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <!-- discount code ends -->
+                            <div class="mt-3 shadow p-3 bg-white">
+                                <div class="pt-4">
+                                    <h5 class="mb-4">Expected delivery date</h5>
+                                    <p>July 27th 2020 - July 29th 2020</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Optional JavaScript -->
+        <!-- Popper.js first, then Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+            integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+            crossorigin="anonymous"></script>
+
+        <script type="text/javascript">
+
+            var product_total_amt = document.getElementById('product_total_amt');
+            var shipping_charge = document.getElementById('shipping_charge');
+            var total_cart_amt = document.getElementById('total_cart_amt');
+            var discountCode = document.getElementById('discount_code1');
+            const decreaseNumber = (incdec, itemprice) => {
+                var itemval = document.getElementById(incdec);
+                var itemprice = document.getElementById(itemprice);
+                console.log(itemprice.innerHTML);
+                // console.log(itemval.value);
+                if (itemval.value <= 0) {
+                    itemval.value = 0;
+                    alert('Negative quantity not allowed');
+                } else {
+                    itemval.value = parseInt(itemval.value) - 1;
+                    itemval.style.background = '#fff';
+                    itemval.style.color = '#000';
+                    itemprice.innerHTML = parseInt(itemprice.innerHTML) - 15;
+                    product_total_amt.innerHTML = parseInt(product_total_amt.innerHTML) - 15;
+                    total_cart_amt.innerHTML = parseInt(product_total_amt.innerHTML) + parseInt(shipping_charge.innerHTML);
+                }
+            }
+            const increaseNumber = (incdec, itemprice) => {
+                var itemval = document.getElementById(incdec);
+                var itemprice = document.getElementById(itemprice);
+                // console.log(itemval.value);
+                if (itemval.value >= 5) {
+                    itemval.value = 5;
+                    alert('max 5 allowed');
+                    itemval.style.background = 'red';
+                    itemval.style.color = '#fff';
+                } else {
+                    itemval.value = parseInt(itemval.value) + 1;
+                    itemprice.innerHTML = parseInt(itemprice.innerHTML) + 15;
+                    product_total_amt.innerHTML = parseInt(product_total_amt.innerHTML) + 15;
+                    total_cart_amt.innerHTML = parseInt(product_total_amt.innerHTML) + parseInt(shipping_charge.innerHTML);
+                }
+            }
+
+
+            const discount_code = () => {
+                let totalamtcurr = parseInt(total_cart_amt.innerHTML);
+                let error_trw = document.getElementById('error_trw');
+                if (discountCode.value === 'thapa') {
+                    let newtotalamt = totalamtcurr - 15;
+                    total_cart_amt.innerHTML = newtotalamt;
+                    error_trw.innerHTML = "Hurray! code is valid";
+                } else {
+                    error_trw.innerHTML = "Try Again! Valid code is thapa";
+                }
+            }
+
+            // Added Manually
+            if (localStorage.getItem('add_to_cart') == null) {
+                var cart = {};
+            }
+            else {
+                cart = JSON.parse(localStorage.getItem('add_to_cart'));
+                document.getElementById('add_to_cart').innerHTML = Object.keys(cart).length;
+            }
+        </script>
+</div>
+{% endblock body %}

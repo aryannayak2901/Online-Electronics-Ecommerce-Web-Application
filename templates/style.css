@@ -1,0 +1,214 @@
+body {
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
+}
+
+.user_profile_photo{
+    background-color: rgba(var(--b3f,250,250,250),1);
+    border-radius: 50%;
+    box-sizing: border-box;
+    height: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #6a11cb;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+}
+
+.btn-primary{
+    background-color: #6a11cb;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400);
+
+.frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  margin-top: -200px;
+  margin-left: -200px;
+  border-radius: 2px;
+  box-shadow: 1px 2px 10px 0px rgba(0,0,0,0.3);
+  background: #3A92AF;
+  background: -webkit-linear-gradient(bottom left, #3A92AF 0%, #5CA05A 100%);
+  background: -moz-linear-gradient(bottom left, #3A92AF 0%, #5CA05A 100%);
+  background: -o-linear-gradient(bottom left, #3A92AF 0%, #5CA05A 100%);
+  background: linear-gradient(to top right, #3A92AF 0%, #5CA05A 100%); 
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3A92AF', endColorstr='#5CA05A',GradientType=1 );
+  color: #fff;
+	font-family: 'Open Sans', Helvetica, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.center {
+  position: absolute;
+	width: 300px;
+	height: 260px;
+  top: 70px;
+  left: 50px;
+	background: #fff;
+	box-shadow: 8px 10px 15px 0 rgba(0,0,0,0.2);
+	border-radius: 3px;
+}
+
+.title {
+	font-size: 16px;
+	color: #676767;
+	line-height: 50px;
+	height: 50px;
+	border-bottom: 1px solid #D8D8D8;
+	text-align: center;
+}
+
+.dropzone {
+	position: absolute;
+	z-index: 1;
+	box-sizing: border-box;
+	display: table;
+	table-layout: fixed;
+	width: 100px;
+	height: 80px;
+	top: 86px;
+	left: 100px;
+	border: 1px dashed #A4A4A4;
+	border-radius: 3px;
+	text-align: center;
+	overflow: hidden;
+}	
+	/* &.is-dragover {
+		border-color: #666;
+		background: #eee;
+	}
+	
+	.content {
+		display: table-cell;
+		vertical-align: middle;
+	}
+	
+	.upload {
+		margin: 6px 0 0 2px;
+	}
+	
+	.filename {
+		display: block;
+		color: #676767;
+		font-size: 14px;
+		line-height: 18px;
+	}
+	
+	.input {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		opacity: 0;
+	}
+	
+}
+
+.upload-btn {
+	position: absolute;
+	width: 140px;
+	height: 40px;
+	left: 80px;
+	bottom: 24px;
+	background: #6ECE3B;
+	border-radius: 3px;
+	text-align: center;
+	line-height: 40px;
+	font-size: 14px;
+	box-shadow: 0 2px 0 0 #498C25;
+	cursor: pointer;
+	transition: all .2s ease-in-out;
+	
+	&:hover {
+		box-shadow: 0 2px 0 0 #498C25, 0 2px 10px 0 #6ECE3B;
+	}
+}
+
+.bar {
+	position: absolute;
+	z-index: 1;
+	width: 300px;
+	height: 3px;
+	top: 49px;
+	left: 0;
+	background: #6ECE3B;
+	transition: all 3s ease-out;
+	transform: scaleX(0);
+	transform-origin: 0 0;
+	
+	&.active {
+		transform: scaleX(1) translate3d(0,0,0);
+	}
+}
+
+.syncing {
+	position: absolute;
+	top: 109px;
+	left: 134px;
+	opacity: 0;
+	
+	&.active {
+		animation: syncing 3.2s ease-in-out;
+	}
+}
+
+.done {
+	position: absolute;
+	top: 112px;
+	left: 132px;
+	opacity: 0;
+	
+	&.active {
+		animation: done .5s ease-in 3.2s;
+		animation-fill-mode: both;
+	}
+} */
+
+@keyframes syncing {
+	0% {
+		transform: rotate(0deg);
+	}
+	10% {
+		opacity: 1;
+	}
+	90% {
+		opacity: 1;
+	}
+	100% {
+		transform: rotate(360deg);
+		opacity: 0;
+	}
+}
+
+@keyframes done {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300&display=swap'); * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Mulish', sans-serif; } :root { --text-clr: #4f4f4f; } p { color: #6c757d; } a { text-decoration: none; color: var(--text-clr); } a:hover { text-decoration: none; color: var(--text-clr); } h2 { color: var(--text-clr); font-size: 1.5rem; } .main_cart { background: #fff; } .card { border: none; } .product_img img { min-width: 200px; max-height: 200px; } .product_name { color: black; font-size: 1.4rem; text-transform: capitalize; font-weight: 500; } .card-title p { font-size: 0.9rem; font-weight: 500; } .remove-and-wish p { font-size: 0.8rem; margin-bottom: 0; } .price-money h3 { font-size: 1rem; font-weight: 600; } .set_quantity { position: relative; } .set_quantity::after { content: "(Note, 1 piece)"; width: auto; height: auto; text-align: center; position: absolute; bottom: -20px; right: 1.5rem; font-size: 0.8rem; } .page-link { line-height: 16px; width: 45px; font-size: 1rem; display: flex; justify-content: center; align-items: center; color: #495057; } .page-item input { line-height: 22px; padding: 3px; font-size: 15px; display: flex; justify-content: center; align-items: center; text-align: center; } .page-link:hover { text-decoration: none; color: #495057; outline: none !important; } .page-link:focus { box-shadow: none; } .price_indiv p { font-size: 1.1rem; } .fa-heart:hover { color: red; }

@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %} Sign up {% endblock title %}
+
+{% block body %}
+
+<br>
+
+<div class="container">
+    <form class="row g-3" method="post" action="/signup">
+        {% csrf_token %}
+        <p class="display-6"> <b> Required Details </b> </p>
+        <div style="border: solid brown 1px;">
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label"> <b> Email </b> </label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email id for creating a account" required>
+            </div>
+            <div class="col-md-6">
+                <label for="inputusername" class="form-label"> <b> Username </b> </label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username (alphanumeric or alphabetic)" required>
+            </div>
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label"> <b> First Name </b> </label>
+                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter First Name" required>
+            </div>
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label"> <b> Last Name </b> </label>
+                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter Last Name" required>
+            </div>
+            <div class="col-md-6">
+                <label for="inputPassword4" class="form-label"> <b> Password </b> </label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password here" required>
+            </div>
+            <div class="col-md-6">
+                <label for="inputPassword4" class="form-label"> <b> Confirmation Password </b> </label>
+                <input type="password" class="form-control" id="confirmationpassword" name="confirmation_password" placeholder="Enter Password here for confirmation" required>
+            </div>
+            <!-- <div class="col-md-6">
+                <label for="inputPassword4" class="form-label"> <b> Are you create this account as a Customer Or Seller? </b> </label> <br>
+                <input type="radio" id="as_a_customer" name="as_a_customer_or_seller" required> Customer
+                <input type="radio" name="as_a_customer_or_seller" id="as_a_seller" required> Seller
+            </div> -->
+        </div>
+
+        <p class="display-6"> <b> You can fill this Later. </b> </p>
+        <div style="border: solid brown 1px;">
+            <div class="col-12">
+                <label for="inputAddress" class="form-label"> <b> Phone Number </b> </label>
+                <input type="tel" class="form-control" id="phone_number" placeholder="Enter Phone Number" name="phone_number">
+            </div>
+            <div class="col-12">
+                <label for="inputAddress" class="form-label"> <b> Address </b> </label>
+                <input type="text" class="form-control" id="address" placeholder="1234 Main St" name="address">
+            </div>
+            <div class="col-12">
+                <label for="inputAddress2" class="form-label"> <b> Address 2 </b> </label>
+                <input type="text" class="form-control" id="address2" placeholder="Apartment, studio, or floor" name="address2">
+            </div>
+            <div class="col-md-6">
+                <label for="inputCity" class="form-label"> <b> City </b> </label>
+                <input type="text" class="form-control" id="city" name="city" placeholder="Enter City Name here">
+            </div>
+            <div class="col-md-2">
+                <label for="inputZip" class="form-label"> <b> Zip </b> </label>
+                <input type="text" class="form-control" id="zip" name="zip" placeholder="Enter Zip code here.">
+            </div>
+            <div class="col-md-2">
+                <label for="inputZip" class="form-label"> <b> Image </b> </label>
+                <div class="frame">
+                    <div class="content">
+                        <img src="https://100dayscss.com/codepen/upload.svg" class="upload">
+                        <span class="filename"></span>
+                        <input type="file" class="input" name="image" id="image">
+                    </div>
+                </div>
+            </div>
+            
+            <br>
+        </div>
+         <!-- <div class="col-12">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="check me out" name="check me out">
+                <label class="form-check-label" for="gridCheck">
+                    Check me out
+                </label>
+            </div>
+        </div>  -->
+        <div class="col-12">
+            <button type="submit" class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Sign in</button>
+        </div>
+    </form>
+</div>
+
+{% endblock body %}

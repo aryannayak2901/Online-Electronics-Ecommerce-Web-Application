@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <title> {% block title %} {% endblock title %} | e_shop </title>
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- W3Schools CSS -->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+  <!-- TAIWINDS CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Java Script Add Manually -->
+  {% load static %}
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  {% comment %} <script src="{% static 'script.js' %}" type="text/javascript"></script> {% endcomment %}
+
+  <!-- Add CSS Manaully -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+
+  <!-- <link rel="stylesheet"
+    href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/dist/mdb5/standard/core.min.css"> -->
+
+
+  <link rel='stylesheet' id='roboto-subset.css-css'
+    href='https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/mdb5/fonts/roboto-subset.css?ver=3.9.0-update.5'
+    type='text/css' media='all' />
+
+  <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+
+
+   <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav{
+            margin: 10px 150px 10px 150px;
+            border: 1px solid #e7e7e7;
+            position: relative;
+            max-width: 100%;
+        }
+
+        
+        
+        .nav-list {
+            list-style-type: none;
+            overflow: hidden;
+            
+            background-color: #f3f3f3;
+
+        }
+
+        .nav-item {
+            float: left;
+        }
+
+        .nav-item .nav-link {
+            display: flex;
+            color: #666;
+            padding: 10px 16px;
+            text-decoration: none;
+        }
+
+        .right-cornor {
+            text-align: right;
+            position: absolute;
+            right: 0.1px;
+        }
+
+        .nav-item .nav-link:hover:not(.active) {
+            background-color: #fc8403;
+        }
+
+        .nav-item .nav-link.active {
+            color: white;
+            background-color: #04AA6D;
+        }
+        
+        .main-content {
+            margin-top: 10px;
+            max-width: 100%;
+            border: 1px solid blue;
+        }
+
+        .main-content1 {
+            position: relative;
+            bottom: 10px;
+            /* margin: 10px; */
+            /* border: 1px solid blue; */
+            width: 50%;
+            height: auto;
+            margin: 10px;
+            max-width: 100%;
+        }
+        
+        .main-content2 {
+            margin: 10px;
+            /* border: 1px solid blue; */
+            width: 50%;
+            height: auto;
+        }
+        
+        .main-content3 {
+            margin: 10px;
+            max-width: 100%;
+            border: 1px solid blue;
+        }  
+
+    </style>
+
+  
+</head>
+
+<body style="background-color: aliceblue;">
+
+  {% block js %} {% endblock js %}
+
+  <div>
+    {% comment %} <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">e_shop</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about">About</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Services
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="/services">Services</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="/signout">Sign out</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/contact">Contact Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/signin">Sign in</a>
+            </li>
+            <li class="nav-item" style="width: 40px;">
+              <a class="nav-link" href="/history"> Status </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin"></a>
+            </li>
+            <li class="nav-item" style="width: 40px;">
+              <a class="nav-link" href="/user_profile"><img src="/static/user_icon.png" alt=""></a>
+            </li>
+          </ul>
+          <form class="d-flex" method="get" action="/search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query" id='query'>
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+          <div class="mx-2" style="background-color: blueviolet;">
+            <a href="/cart">
+              <button type="button" class="btn btn-lg btn-danger" data-html="true" data-bs-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?" id="popcart">
+              Cart(<span id="add_to_cart">0</span>)
+            </a>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav> {% endcomment %}
+
+    <header>
+        <div class="navigation">
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                      <a class="nav-link" href="/">Home</a></li>
+                    {% comment %} <li class="nav-item"><a class="nav-link" href="#news">News</a></li> {% endcomment %}
+                    <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/about">About</a></li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/services">Services</a></li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/tracker"> Tracker </a></li>
+                    {% comment %} <li class="nav-item right-cornor">
+                      <a class="dropdown-item" href="/signout">Sign out</a></li> {% endcomment %}
+                    <li class="nav-item right-cornor">
+                      <a class="nav-link" href="/signin">Sign in</a></li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/user_profile">User</a></li>
+                </ul>
+                <form class="d-flex" method="get" action="/search">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query" id='query'>
+                  <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <div class="mx-2" style="background-color: blueviolet;">
+                  <a href="/cart">
+                    <button type="button" class="btn btn-lg btn-danger" data-html="true" data-bs-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?" id="popcart">
+                    Cart(<span id="add_to_cart">0</span>)
+                  </a>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+  </div>
+
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span
+        aria-hidden="true">&times;</span></button>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  {% block body %} {% endblock body%}
+  <!-- Optional JavaScript; choose one of the two! -->
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+
+  <!-- Option 2: Separate Popper and Bootstrap JS -->
+  <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+  
+
+  <div>
+    <footer class="bg-light text-center text-white">
+      <!-- Grid container -->
+      <div class="container p-4 pb-0">
+        <!-- Section: Social media -->
+        <section class="mb-4">
+          <!-- Facebook -->
+          <a
+            class="btn btn-primary btn-floating m-1"
+            style="background-color: #3b5998;"
+            href="#!"
+            role="button"
+            ><i class="fab fa-facebook-f"></i
+          ></a>
+    
+          <!-- Twitter -->
+          <a
+            class="btn btn-primary btn-floating m-1"
+            style="background-color: #55acee;"
+            href="#!"
+            role="button"
+            ><i class="fab fa-twitter"></i
+          ></a>
+    
+          <!-- Google -->
+          <a
+            class="btn btn-primary btn-floating m-1"
+            style="background-color: #dd4b39;"
+            href="#!"
+            role="button"
+            ><i class="fab fa-google"></i
+          ></a>
+    
+          <!-- Instagram -->
+          <a
+            class="btn btn-primary btn-floating m-1"
+            style="background-color: #ac2bac;"
+            href="#!"
+            role="button"
+            ><i class="fab fa-instagram"></i
+          ></a>
+    
+          <!-- Linkedin -->
+          <a
+            class="btn btn-primary btn-floating m-1"
+            style="background-color: #0082ca;"
+            href="#!"
+            role="button"
+            ><i class="fab fa-linkedin-in"></i
+          ></a>
+          <!-- Github -->
+          <a
+            class="btn btn-primary btn-floating m-1"
+            style="background-color: #333333;"
+            href="#!"
+            role="button"
+            ><i class="fab fa-github"></i
+          ></a>
+        </section>
+        <!-- Section: Social media -->
+      </div>
+      <!-- Grid container -->
+    
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2022 Copyright:
+        <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+  </div>
+
+</body>
+
+</html>

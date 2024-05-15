@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+
+{% block title %} Checkout {% endblock title %}
+
+{% block body %}
+
+<script>
+
+  // Find out the cart items from localStorage
+  // var item = document.getElementById("add_to_cart")
+  if (localStorage.getItem('add_to_cart') == null) {
+    var cart = {};
+  }
+  else {
+    cart = JSON.parse(localStorage.getItem('add_to_cart'));
+    document.getElementById('add_to_cart').innerHTML = Object.keys(cart).length;
+  }
+
+  // If the add to cart button is clicked, add/increment the item.
+  $(document).ready(function () {
+    $(".add_to_cart").click(function () {
+      console.log("Clicked👍");
+      var idstr = this.id.toString();
+      console.log(idstr);
+      if (cart[idstr] != undefined) {
+        cart[idstr] = cart[idstr] + 1;
+      }
+      else {
+        cart[idstr] = 1;
+      }
+      console.log(cart);
+      localStorage.setItem('add_to_cart', JSON.stringify(cart));
+      
+      // var cart_length = document.getElementById("myVar").value
+      // console.log(cart_length);
+      document.getElementById('add_to_cart').innerHTML = Object.keys(cart).length;
+
+      // $('#itemsJson').val(JSON.stringify(cart));
+      // {% if thank %}
+      //   alert('Thanks for ordering with us. Your order is {{id}}. Use it to track your order using our order tracker.');
+      //   localStorage.clear();
+      // {% endif %} 
+    });
+    
+  });
+
+  
+  
+  // Add Popover to Cart
+//   $('#popcart').popover();
+//   document.getElementById("popcart").setAttribute('data-content', '<h> Cart for your item. </h5>');
+// </script>
+
+
+<div class="container">
+  <div class="col my-4">
+    <h2 class="display-6"> <b> Step 1 - e_shop Express Checkout - Review Your Cart Items 👇 </b> </h2> <br>
+
+    
+    <div id="items">
+      <ol class="list-group list-group-numbered">
+
+        {% for i in checkout_list %}
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold"> {{i.product_name}} </div>
+              {{i.desc}}
+            </div>
+            <p class="badge bg-primary rounded-pill"> Rs. <span> {{i.price}} </span> </p>
+            <form action="/checkout" method="post">
+              {% csrf_token %}
+              <button class="btn btn-primary col ml-2" name="delete_button_for_checkout" id="delete_button_for_checkout" value="{{i.id}}">
+                Remove
+              </button>
+            </form>
+          </li>
+        {% endfor %}
+        <!-- <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div class="ms-2 me-auto">
+            <div class="fw-bold">Subheading</div>
+            Content for list item
+          </div>
+          <span class="badge bg-primary rounded-pill">14</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div class="ms-2 me-auto">
+            <div class="fw-bold">Subheading</div>
+            Content for list item
+          </div>
+          <span class="badge bg-primary rounded-pill">14</span>
+        </li> -->
+      </ol>
+    </div>
+  </div>
+  <br>
+
+  <p class="display-6">Total Price Rs.<span>{{item_total_price_for_checkout}}</span></p>
+
+  
+  <div class="col my-4">
+    <h2 class="display-6"> <b> Step 2 - Enter Address & Other Details 👇</b> </h2>
+    <br>
+    <form class="row g-3" method="post" action="/checkout">
+      {% csrf_token %}
+      <input type="hidden" name="itemsJson" id="itemsJson">
+      <div class="col-md-6">
+        <label for="inputname" class="form-label">Name</label>
+        <input type="name" class="form-control" name="name" id="name" placeholder="Enter Name" required>
+      </div>
+      <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">Email</label>
+        <input type="email" class="form-control" name="email" id="email" placeholder="Enter Email" required>
+      </div>
+      <div class="col-12">
+        <label for="inputAddress" class="form-label">Address</label>
+        <input type="text" class="form-control" name="address" id="address" placeholder="1234 Main St" required>
+      </div>
+      <div class="col-md-6">
+        <label for="inputCity" class="form-label">City</label>
+        <input type="text" class="form-control" name="city" id="city" placeholder="Enter City Name" required>
+      </div>
+      <!-- <div class="col-md-4">
+        <label for="inputState" class="form-label">State</label>
+        <select id="inputState" class="form-select">
+          <option selected>Choose...</option>
+          <option>...</option>
+        </select>
+      </div> -->
+      <div class="col-md-2">
+        <label for="inputZip" class="form-label">Zip</label>
+        <input type="text" class="form-control" name="zip" id="zip" placeholder="Enter Zip" required>
+      </div>
+      <div class="col-md-6">
+        <label for="inputname" class="form-label">Phone Number</label>
+        <input type="tel" class="form-control" name="phone_number" id="phone_number" placeholder="Enter Name" required>
+      </div>
+      <div>
+        <input type="hidden" name="total_price" id="total_price" value="{{item_total_price_for_checkout}}">
+      </div>
+      <!-- <div class="col-12">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="gridCheck">
+          <label class="form-check-label" for="gridCheck">
+            Check me out
+          </label>
+        </div>
+      </div> -->
+      <div class="col-12">
+          {% comment %} <input type="text" name="checkout_item_list_for_user_profile" id="checkout_item_list_for_user_profike" value=""> {% endcomment %}
+          <button type="submit" name="submit_checkout_list" class="btn btn-primary" value="True" style="background-color: blue;">Place Order</button>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+{% endblock body %}

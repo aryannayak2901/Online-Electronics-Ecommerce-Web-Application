@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+
+{% block title %} Tracker {% endblock title %}
+
+{% block body %}
+
+
+  
+  
+  <div class="container">
+    <div class="col my-4">
+      <h2 class="display-6"> <b> Step 1 - e_shop Express Tracker -  Enter your Order Id and Email address to track your order </b> </h2> <br>
+        
+        <div>
+            <form action="#" id="trackerform" method="post">
+                {% csrf_token %}
+                <div class="col-md-6">
+                    <label for="inputname" class="form-label">Order Id</label>
+                    <input type="name" class="form-control" name="OrderId" id="OrderId" placeholder="Enter Name" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="inputEmail4" class="form-label">Email</label>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Enter Email" required>
+                    <br>
+                    <button type="submit" class="btn btn-primary" value="True" style="background-color: blue;">Track Order</button>
+                </div>
+            </form>
+        </div>
+      
+      <!-- <div id="items">
+        <ol class="list-group list-group-numbered">
+  
+          {% comment %} {% for i in checkout_list %}
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+              <div class="ms-2 me-auto">
+                <div class="fw-bold"> {{i.product_name}} </div>
+                {{i.desc}}
+              </div>
+              <span class="badge bg-primary rounded-pill"> {{i.price}} </span>
+            </li>
+          {% endfor %} {% endcomment %}
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Subheading</div>
+              Content for list item
+            </div>
+            <span class="badge bg-primary rounded-pill">14</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Subheading</div>
+              Content for list item
+            </div>
+            <span class="badge bg-primary rounded-pill">14</span>
+          </li>
+        </ol>
+      </div> -->
+    </div>
+    <br>
+    
+    <div class="col my-4">
+      <h2 class="display-6"> <b> Step 2 - Follow is your Product Location </b> </h2>
+
+        <div class="my-4">
+            <ul class="list-group" id="items">
+            </ul>
+        </div>
+
+        <h2 class="display-6"> <b> Your Order Details </b> </h2>
+
+        <div class="my-4">
+            <ul class="list-group" id="citems">
+            </ul>
+        </div>
+
+      <br>
+      <!-- <form class="row g-3" method="post" action="/checkout">
+        {% csrf_token %}
+        <input type="hidden" name="itemsJson" id="itemsJson">
+        <div class="col-md-6">
+          <label for="inputname" class="form-label">Name</label>
+          <input type="name" class="form-control" name="name" id="name" placeholder="Enter Name" required>
+        </div>
+        <div class="col-md-6">
+          <label for="inputEmail4" class="form-label">Email</label>
+          <input type="email" class="form-control" name="email" id="email" placeholder="Enter Email" required>
+        </div>
+        <div class="col-12">
+          <label for="inputAddress" class="form-label">Address</label>
+          <input type="text" class="form-control" name="address" id="address" placeholder="1234 Main St" required>
+        </div>
+        <div class="col-md-6">
+          <label for="inputCity" class="form-label">City</label>
+          <input type="text" class="form-control" name="city" id="city" placeholder="Enter City Name" required>
+        </div>
+        <div class="col-md-4">
+          <label for="inputState" class="form-label">State</label>
+          <select id="inputState" class="form-select">
+            <option selected>Choose...</option>
+            <option>...</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label for="inputZip" class="form-label">Zip</label>
+          <input type="text" class="form-control" name="zip" id="zip" placeholder="Enter Zip" required>
+        </div>
+        <div class="col-md-6">
+          <label for="inputname" class="form-label">Phone Number</label>
+          <input type="tel" class="form-control" name="phone_number" id="phone_number" placeholder="Enter Name" required>
+        </div>
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck">
+            <label class="form-check-label" for="gridCheck">
+              Check me out
+            </label>
+          </div>
+        </div>
+        <div class="col-12">
+          <form method="post" action="/history">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary" value="True" style="background-color: blue;">Place Order</button>
+          </form>
+        </div>
+      </form> -->
+    </div>
+  
+  </div>
+
+
+<script>
+
+$('#trackerform').submit(function(event) {
+    $('#items').empty();
+    var formData = {
+        'OrderId': $('input[name=OrderId]').val(),
+        'email': $('input[name=email]').val(),
+        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+    };
+    $.ajax({
+            type: "POST",
+            url: "{% url 'tracker' %}",
+            data: formData,
+            encode: true
+        })
+        .done(function(data) {
+            console.log("hi"+data)
+            data = JSON.parse(data)
+            updates = data[0];
+            if (updates.length > 0 & updates != {}) {
+                for (i = 0; i < updates.length; i++) {
+                    let text = updates[i]['text'];
+                    let time = updates[i]['time'];
+                    mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                    ${text}
+                    <span class="badge badge-primary badge-pill">${time}</span>
+                </li>`
+                    $('#items').append(mystr);
+                }
+            } else {
+                mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                    Sorry, We are not able to fetch this order id and email. Make sure to type correct order Id and email</li>`
+                $('#items').append(mystr);
+            }
+
+            // Fill in the order details
+            // cart = data[1];
+            // console.log('hi'+cart);
+            // for (item in cart) {
+
+            //     let name = cart[item][1];
+            //     let qty = cart[item][0];
+            //     mystr = `        <li class="list-group-item d-flex justify-content-between align-items-center">
+            //        ${name}
+            //         <span class="badge badge-primary badge-pill"></span>
+            //     </li>`
+            //     $('#citems').append(mystr);
+            // }
+        });
+    event.preventDefault();
+});
+
+</script>
+
+{% endblock body %}

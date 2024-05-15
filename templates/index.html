@@ -1,0 +1,259 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock title %}
+
+{% block body %}
+
+<style>
+  .shake_image:hover {
+  /* Start the shake animation and make the animation last for 0.5 seconds */
+  animation: shake 2s;
+
+  /* When the animation is finished, start again */
+  animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+</style>
+
+<script>
+
+  // Find out the cart items from localStorage
+  // var item = document.getElementById("add_to_cart")
+  if (localStorage.getItem('add_to_cart') == null) {
+    var cart = {};
+  }
+  else {
+    cart = JSON.parse(localStorage.getItem('add_to_cart'));
+    document.getElementById('add_to_cart').innerHTML = Object.keys(cart).length;
+  }
+
+  // If the add to cart button is clicked, add/increment the item.
+  $(document).ready(function () {
+    $(".add_to_cart").click(function () {
+      console.log("Clicked👍");
+      var idstr = this.id.toString();
+      console.log(idstr);
+      if (cart[idstr] != undefined) {
+        cart[idstr] = cart[idstr] + 1;
+      }
+      else {
+        cart[idstr] = 1;
+      }
+      console.log(cart);
+      localStorage.setItem('add_to_cart', JSON.stringify(cart));
+      
+      // var cart_length = document.getElementById("myVar").value
+      // console.log(cart_length);
+      document.getElementById('add_to_cart').innerHTML = Object.keys(cart).length;
+    });
+  });
+  
+  // Add Popover to Cart
+//   $('#popcart').popover();
+//   document.getElementById("popcart").setAttribute('data-content', '<h> Cart for your item. </h5>');
+// </script>
+
+<div class="container my-4">
+  <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+        aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="10000">
+        <img src="https://source.unsplash.com/2000x600/?laptop" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5 style="color: aqua;">First slide label</h5>
+          <p style="color: aqua;">Some representative placeholder content for the first slide.</p>
+          <!-- <butt class="btn btn-primary add_to_cart" id="add_to_cart"> Add To Cart </button> -->
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="2000">
+        <img src="https://source.unsplash.com/2000x600/?headphones" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5 style="color: aqua;">Second slide label</h5>
+          <p style="color: aqua;">Some representative placeholder content for the second slide.</p>
+          <!-- <butt class="btn btn-primary add_to_cart" id="add_to_cart"> Add To Cart </button> -->
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="https://source.unsplash.com/2000x600/?iphone" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5 style="color: aqua;">Third slide label</h5>
+          <p style="color:aqua;">Some representative placeholder content for the third slide.</p>
+          <!-- <butt class="btn btn-primary add_to_cart" id="add_to_cart"> Add To Cart </button> -->
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+
+<li data-bs-target="#demo" data-bs-slide-to="3"></li>
+
+<div class="col-md-12 col-lg-9 col-11 mx-auto main_cart mb-lg-0 mb-5 shadow pl-2"
+  style="background-color: antiquewhite;">
+  <section class="text-gray-600 body-font align-items-center">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="flex flex-wrap -m-4">
+        <!-- <div class="lg:w-1/4 md:w-1/2 p-4 w-full bg-image hover-overlay hover-zoom ripple rounded">
+          <a class="block relative h-48 rounded overflow-hidden">
+            <img alt="ecommerce" class="object-cover object-center w-full h-full block"
+              src="/static/airpods-pro-white.jpg">
+          </a>
+          <div class="mt-4">
+            <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">{{product.1.category}}</h3>
+            <h2 class="text-gray-900 title-font text-lg font-medium">{{product.1.product_name}}</h2>
+            <p>{{product.1.desc}}</p>
+            <p class="mt-1"> <b> {{product.1.price}} </b> </p>
+            <button class="btn btn-primary add_to_cart" id = "add_to_cart"> Add To Cart </button>
+          </div>
+        </div> -->
+
+        {% for i in product %}
+        {% comment %} {% n = random.randint(1, len(product)) %} {% endcomment %}
+        {% if forloop.counter < 11 %} 
+        
+        <section class="text-gray-600 body-font">
+          <div class="container px-4 py-18 mx-auto">
+            <div class="flex flex-wrap -m-4">
+              <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+                
+                <div class="card bg-dark text-white border-dark bg-image hover-overlay hover-zoom hover-shadow ripple"
+                  style="width: 14rem;">
+                  <a class="block relative h-48 rounded overflow-hidden" href="/product_view/{{i.id}}">
+                    <img alt="ecommerce" class="shake_image card-img-top" src="/media/{{i.image}}">
+                  </a>
+                  <a href="/product_view/{{i.id}}">
+                  <div class="card-body">
+                    <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1 text-white">{{i.category}}</h3>
+                    <h2 class="text-gray-900 title-font text-lg font-medium text-white">{{i.product_name}}</h2>
+                    <p class="card-text text-white">{{i.desc |slice:"0:40"}}...</p>
+                    <p class="mt-1 text-white"> <b> {{i.price}} </b> </p>
+                    <div class="card-footer bg-transparent border-light">
+                      <a>
+                        <form action="/cart" method="post">
+                          {% csrf_token %}
+                          <input hidden type="number" name="item_price_for_cart" id="item_price_for_cart" value="{{i.price}}">
+                          <button class="btn btn-primary add_to_cart" name="item_of_cart" id="product_{{i.id}}" value="{{i.id}}"> Add To Cart </button>
+                        </form>
+                      </a>
+                    </div>
+                  </div>
+                </a>
+                </div>
+              
+              </div>
+            </div>
+          </div>
+  </section>
+  {% endif %}
+  {% endfor %}
+
+  <!-- <div class="lg:w-1/4 md:w-1/2 p-4 w-full bg-image hover-overlay hover-zoom ripple rounded">
+          <a class="block relative h-48 rounded overflow-hidden">
+            <img alt="ecommerce" class="object-cover object-center w-full h-full block"
+              src="/static/cosmicbyte-gs430-headphone.jpg">
+          </a>
+          <div class="mt-4">
+            <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">{{product.2.category}}</h3>
+            <h2 class="text-gray-900 title-font text-lg font-medium">{{product.2.product_name}}</h2>
+            <p>{{product.2.desc}}</p>
+            <p class="mt-1"> <b> {{product.2.price}} </b> </p>
+            <button class="btn btn-primary add_to_cart" id = "add_to_cart"> Add To Cart </button>
+          </div>
+        </div>
+        <div class="lg:w-1/4 md:w-1/2 p-4 w-full bg-image hover-overlay hover-zoom ripple rounded">
+          <a class="block relative h-48 rounded overflow-hidden">
+            <img alt="ecommerce" class="object-cover object-center w-full h-full block"
+              src="/static/gaming-earphones.jpeg">
+          </a>
+          <div class="mt-4">
+            <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">{{product.6.category}}</h3>
+            <h2 class="text-gray-900 title-font text-lg font-medium">{{product.6.product_name}}</h2>
+            <p>{{product.6.desc}}</p>
+            <p class="mt-1"> <b> {{product.6.price}} </b> </p>
+            <button class="btn btn-primary add_to_cart" id = "add_to_cart"> Add To Cart </button>
+          </div>
+        </div>
+        <div class="lg:w-1/4 md:w-1/2 p-4 w-full bg-image hover-overlay hover-zoom ripple rounded">
+          <a class="block relative h-48 rounded overflow-hidden">
+            <img alt="ecommerce" class="object-cover object-center w-full h-full block"
+              src="/static/gaming-rgb-keybord.jpg">
+          </a>
+          <div class="mt-4">
+            <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">{{procut.7.category}}</h3>
+            <h2 class="text-gray-900 title-font text-lg font-medium">{{product.7.product_name}}</h2>
+            <p>{{product.7.desc}}</p>
+            <p class="mt-1"> <b> {{product.7.price}} </b> </p>
+            <button class="btn btn-primary add_to_cart" id = "add_to_cart"> Add To Cart </button>
+          </div>
+        </div>
+        <div class="lg:w-1/4 md:w-1/2 p-4 w-full bg-image hover-overlay hover-zoom ripple rounded">
+          <a class="block relative h-48 rounded overflow-hidden">
+            <img alt="ecommerce" class="object-cover object-center w-full h-full block"
+              src="/static/gaming-rgb-mouse.jpeg">
+          </a>
+          <div class="mt-4">
+            <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">{{product.8.category}}</h3>
+            <h2 class="text-gray-900 title-font text-lg font-medium">{{product.8.product_name}}</h2>
+            <p>{{product.8.desc}}</p>
+            <p class="mt-1"> <b> {{product.8.price}} </b> </p>
+            <button class="btn btn-primary add_to_cart" id = "add_to_cart"> Add To Cart </button>
+          </div>
+        </div>
+        <div class="lg:w-1/4 md:w-1/2 p-4 w-full bg-image hover-overlay hover-zoom ripple rounded">
+          <a class="block relative h-48 rounded overflow-hidden">
+            <img alt="ecommerce" class="object-cover object-center w-full h-full block"
+              src="/static/gaming-speakers.jpg">
+          </a>
+          <div class="mt-4">
+            <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">{{product.5.category}}</h3>
+            <h2 class="text-gray-900 title-font text-lg font-medium">{{product.5.product_name}}</h2>
+            <p>{{product.5.desc}}</p>
+            <p class="mt-1"> <b> {{product.5.price}} </b> </p>
+            <button class="btn btn-primary add_to_cart" id = "add_to_cart"> Add To Cart </button>
+          </div>
+        </div>
+        <div class="lg:w-1/4 md:w-1/2 p-4 w-full bg-image hover-overlay hover-zoom ripple rounded">
+          <a class="block relative h-48 rounded overflow-hidden">
+            <img alt="ecommerce" class="object-cover object-center w-full h-full block"
+              src="/static/iphone-13-pro-max-blue-select.png">
+          </a>
+          <div class="mt-4">
+            <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">{{product.0.category}}</h3>
+            <h2 class="text-gray-900 title-font text-lg font-medium">{{product.0.product_name}}</h2>
+            <p>{{product.0.desc}}</p>
+            <p class="mt-1"> <b> {{product.0.price}} </b> </p>
+            <button class="btn btn-primary add_to_cart" id = "add_to_cart"> Add To Cart </button>
+          </div>
+        </div> -->
+</div>
+</div>
+</section>
+</div>
+
+
+{% endblock body %}

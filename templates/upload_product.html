@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %} Upload Product {% endblock title %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1 class="display-6"> This is Upload Product Page. </h1>
+    </div>
+    <br>
+    <div class="container">
+        <form action="/upload_product" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+            <div class="col-md-6">
+                <label for="inputname" class="form-label">Product Name</label>
+                <input type="name" class="form-control" name="product_name" id="product_name" placeholder="Enter Name" required>
+              </div>
+              <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">category</label>
+                <input type="text" class="form-control" name="category" id="category" placeholder="Enter Email" required>
+              </div>
+              <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Subcategory</label>
+                <input type="text" class="form-control" name="subcategory" id="subcategory" placeholder="Enter Email" required>
+              </div>
+              <div class="col-md-6">
+                <label for="inputCity" class="form-label">price</label>
+                <input type="text" class="form-control" name="price" id="price" placeholder="Enter City Name" required>
+              </div>
+              <div class="col-md-6">
+                <label for="inputCity" class="form-label">desc</label>
+                <input type="text" class="form-control" name="desc" id="desc" placeholder="Enter City Name" required>
+              </div>
+              <div class="col-md-6">
+                <label for="inputCity" class="form-label">Seller Name</label>
+                <input type="text" class="form-control" name="seller_name" id="seller_name" placeholder="Enter City Name" required>
+              </div>
+              <div class="col-md-2">
+                <label for="inputZip" class="form-label"> <b> Image </b> </label>
+                <div>                  
+                      <input type="file" name="image" id="image" required>
+                </div>
+            </div>
+            <br>
+            <div class="col-12">
+              <button type="submit" class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Upload</button>
+            </div>
+        </form>
+    </div>
+    
+    <!-- <div>
+        <div class="frame">
+            <div class="center">
+                  <div class="bar"></div>
+                  <div class="title">Drop file to upload</div>
+                  <div class="dropzone">
+                      <div class="content">
+                          <img src="https://100dayscss.com/codepen/upload.svg" class="upload">
+                          <span class="filename"></span>
+                          <input type="file" class="input">
+                      </div>
+                  </div>
+                  <img src="https://100dayscss.com/codepen/syncing.svg" class="syncing">
+                  <img src="https://100dayscss.com/codepen/checkmark.svg" class="done">
+                  <div class="upload-btn">Upload file</div>
+            </div>
+          </div>
+    </div> -->
+
+{% endblock body %}
